@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add issue</title>
+</head>
+<body>
+<input type="text" name="title" id="issue-title" placeholder="Title" />
+<input type="text" name="username" id="issue-user" placeholder="Username" />
+<input type="email" name="user-email" id="issue-mail" placeholder="you@example.com" />
+<textarea name="body"  id="issue-body" placeholder="Your story to share..." ></textarea>
+<button id="submit">Submit</button>
+<h4></h4>
+<button id="test-get">Test</button>
+<p></p>
+<script type="text/javascript">
+	var title = document.querySelector('#issue-title'),
+		user = document.querySelector('#issue-user'),
+		mail = document.querySelector('#issue-mail'),
+		description = document.querySelector('#issue-body'),
+		submit = document.querySelector('#submit'),
+		flag = document.querySelector('h4');
+
+	submit.addEventListener('click', function() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		 flag.innerHTML = this.responseText;
+		}
+		};
+		xhttp.open("POST", "https://api.github.com/repos/pierreburton91/test-api/issues", true);
+		xhttp.send();
+	});
+
+	var testGet = document.querySelector('#test-get'),
+		response = document.querySelector('p');
+
+	testGet.addEventListener('click', function() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		 response.innerHTML = this.responseText;
+		}
+		};
+		xhttp.open("GET", "https://api.github.com/zen", true);
+		xhttp.send();
+	});
+</script>
+</body>
+</html>
